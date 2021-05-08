@@ -120,25 +120,25 @@ fi
 #                             FRED'S ADDITIONS                               #
 ##############################################################################
 
+# ~/.bashrc: executed by bash(1) for non-login shells.
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+for file in $HOME/.bashrc.d/*.sh; do
+    source "$file"
+done
+
 export PATH="/home/fred/.pyenv/bin:$PATH"
-export PS1="[\u@\h]\$ "
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PS1="\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ "
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export EDITOR="/usr/bin/vim"
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+alias open='xdg-open'
 
 # docker build stuff
 export COMPOSE_DOCKER_CLI_BUILD=1
 export DOCKER_BUILDKIT=1
-
-alias indent_json='python3 /home/fred/src/indent_json.py '
-alias open='xdg-open'
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-source /home/fred/.config/broot/launcher/bash/br
-
-# tokens to set as env vars we don't want committed to dotfile git
-source /home/fred/.tokens
-
-complete -C /usr/bin/terraform terraform
