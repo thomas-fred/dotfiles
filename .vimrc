@@ -70,3 +70,4 @@ set wildmenu
 set number
 set lazyredraw
 set statusline+=\ %f
+set tabpagemax=50
